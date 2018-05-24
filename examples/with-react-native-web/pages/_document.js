@@ -2,14 +2,11 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import React from 'react'
 import { AppRegistry } from 'react-native-web'
 
-let index = 0
-
 // Force Next-generated DOM elements to fill their parent's height.
-// Not required for using of react-native-web, but helps normalize
-// layout for top-level wrapping elements.
 const normalizeNextElements = `
-  body > div:first-child,
   #__next {
+    display: flex;
+    flex-direction: column;
     height: 100%;
   }
 `
@@ -20,13 +17,10 @@ export default class MyDocument extends Document {
     const { getStyleElement } = AppRegistry.getApplication('Main')
     const page = renderPage()
     const styles = [
-      <style
-        key={index++}
-        dangerouslySetInnerHTML={{ __html: normalizeNextElements }}
-      />,
+      <style dangerouslySetInnerHTML={{ __html: normalizeNextElements }} />,
       getStyleElement()
     ]
-    return { ...page, styles }
+    return { ...page, styles: React.Children.toArray(styles) }
   }
 
   render () {
@@ -35,7 +29,7 @@ export default class MyDocument extends Document {
         <Head>
           <title>react-native-web</title>
         </Head>
-        <body style={{ height: '100%', width: '100%', overflowY: 'scroll' }}>
+        <body style={{ height: '100%', width: '100%' }}>
           <Main />
           <NextScript />
         </body>
