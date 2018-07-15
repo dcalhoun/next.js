@@ -6,28 +6,29 @@ const cjsNodeModules = /node_modules(?!\/react-native-web(?!.*node_modules))/
 module.exports = {
   webpack: (config, { defaultLoaders }) => {
     // Alias RN to RNW
-    config.resolve.alias['react-native'] = 'react-native-web'
+    // config.resolve.alias['react-native'] = 'react-native-web'
 
     // Compile packages using ES modules
-    config.resolve.symlinks = false
-    config.externals = config.externals.map(
-      external =>
-        typeof external === 'function'
-          ? (ctx, req, cb) => (esNodeModules.test(req) ? cb() : external(ctx, req, cb))
-          : external
-    )
-    config.module.rules.push({
-      test: /\.js$/,
-      loader: defaultLoaders.babel,
-      include: [esNodeModules]
-    })
+    // config.resolve.symlinks = false
+    // This externals block appears to be the culprit for missing server styles
+    // config.externals = config.externals.map(
+    //   external =>
+    //     typeof external === 'function'
+    //       ? (ctx, req, cb) => (esNodeModules.test(req) ? cb() : external(ctx, req, cb))
+    //       : external
+    // )
+    // config.module.rules.push({
+    //   test: /\.js$/,
+    //   loader: defaultLoaders.babel,
+    //   include: [esNodeModules]
+    // })
 
     return config
   },
-  webpackDevMiddleware: config => {
-    // Ignore packages using CJS modules
-    const ignored = [config.watchOptions.ignored[0], cjsNodeModules]
-    config.watchOptions.ignored = ignored
-    return config
-  }
+  // webpackDevMiddleware: config => {
+  //   // Ignore packages using CJS modules
+  //   const ignored = [config.watchOptions.ignored[0], cjsNodeModules]
+  //   config.watchOptions.ignored = ignored
+  //   return config
+  // }
 }
