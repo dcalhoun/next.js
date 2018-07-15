@@ -2,7 +2,7 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import React from 'react'
 import { AppRegistry } from 'react-native-web'
 
-// Force Next-generated DOM elements to fill their parent's height.
+// Force Next-generated DOM elements to fill their parent's height
 const normalizeNextElements = `
   #__next {
     display: flex;
@@ -29,7 +29,7 @@ export default class MyDocument extends Document {
         <Head>
           <title>react-native-web</title>
         </Head>
-        <body style={{ height: '100%' }}>
+        <body style={{ height: '100%', overflow: 'hidden' }}>
           <Main />
           <NextScript />
         </body>

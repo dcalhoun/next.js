@@ -7,10 +7,10 @@
   },
   "dependencies": {
     "babel-plugin-react-native-web": "^0.8.8",
-    "next": "^6.1.1",
-    "react": "^16.0.0",
-    "react-art": "^16.4.0",
-    "react-dom": "^16.0.0",
+    "next": "latest",
+    "react": "^16.4.1",
+    "react-art": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-native-web": "^0.8.8"
   }
 }
